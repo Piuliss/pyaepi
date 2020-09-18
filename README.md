@@ -1,6 +1,6 @@
 # Documentation
 
-Pyapi is purposed to be used a Internet speed meter. For checking if our ISP provide the Internet speed that they sell us. 
+Pyapi is purposed to be used as a Internet speed meter. For checking if our ISP provide the Internet speed that they sell us. 
 Pyapi is a webapp built to be executed on Raspberry Pi 24/7 or in any PC with `python3`.
 
 ## Getting Started
