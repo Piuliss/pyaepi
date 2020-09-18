@@ -6,6 +6,8 @@ Pyapi is a webapp built to be executed on Raspberry Pi 24/7 or in any PC with `p
 * clone repository
 * `cd pyaepi`
 * `pip install -r requirements.txt`
+* `cp .env.example .env`
+* Add SECRET_KEY: `vim .env`
 * For creating SQlite DB: `python manage.py db upgrade`
 * `python appserver.py`
 * You should see a empty chart. Go to browser: `<RPI_IP>:5000`
