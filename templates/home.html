@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>RPi Speed Test</title>
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.css">
+	<script type="application/javascript"
+			src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.bundle.js"></script>
+
+</head>
+<body>
+<canvas id="myChart"></canvas>
+<script type="application/javascript">
+	var xhr = new XMLHttpRequest();
+
+	xhr.onreadystatechange = function () {
+		if (xhr.readyState === 4) {
+			var ctx = document.getElementById('myChart').getContext('2d');
+			var speed_tests = JSON.parse(xhr.responseText).speed_tests;
+			var data = [];
+			var i;
+			for (i = 0; i < speed_tests.length; i++) {
+				var e = speed_tests[i];
+				data.push({x: new Date(e.created_at), y: e.download})
+			}
+			var datasets = {
+				labels: [],
+				datasets: [{
+					label: 'Download Speed on Mbp/s',
+					backgroundColor: 'rgb(255, 99, 132)',
+					borderColor: 'rgb(255, 99, 132)',
+					fill: false,
+					data: data
+				}]
+			};
+			var myLineChart = new Chart(ctx, {
+				type: 'line',
+				data: datasets,
+				options: {
+					scales: {
+						xAxes: [{
+							type: 'time',
+							time: {
+								unit: 'minute',
+								displayFormats: {
+									minute: 'MMM D, YY h:mm'
+								}
+							}
+						}]
+					}
+				}
+			});
+		}
+	};
+
+	xhr.open('GET', '/api/speed_tests/');
+	xhr.send();
+
+
+</script>
+</body>
+</html>
